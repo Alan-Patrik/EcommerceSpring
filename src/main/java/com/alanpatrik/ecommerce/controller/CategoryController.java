@@ -11,27 +11,27 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.alanpatrik.ecommerce.entities.Order;
-import com.alanpatrik.ecommerce.services.OrderService;
+import com.alanpatrik.ecommerce.entities.Category;
+import com.alanpatrik.ecommerce.services.CategoryService;
 
 @RestController
-@RequestMapping("/orders")
-public class OrderController {
-	
+@RequestMapping(value = "/categories")
+public class CategoryController {
+
 	@Autowired
-	private OrderService service;
+	private CategoryService service;
 	
 	@GetMapping
 	@ResponseStatus(HttpStatus.OK)
-	public List<Order> findAll() {
-		List<Order> list = service.findAll();
+	public List<Category> findAll() {
+		List<Category> list = service.findAll();
 		return list;
 	}
 	
 	@GetMapping("/{id}")
 	@ResponseStatus(HttpStatus.OK)
-	public Optional<Order> findById(@PathVariable Long id) {
-		Optional<Order> list = service.findById(id);
+	public Optional<Category> findById(@PathVariable Long id) {
+		Optional<Category> list = service.findById(id);
 		return list;
 	}
 }
