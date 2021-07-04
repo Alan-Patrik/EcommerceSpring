@@ -46,8 +46,8 @@ public class UserController {
 		return ResponseEntity.created(uri).body(obj);
 	}
 	
-	@DeleteMapping("/delete/{id}")
-	@ResponseStatus(HttpStatus.OK)
+	@DeleteMapping("/{id}")
+	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void delete(@PathVariable Long id) { 
 		service.delete(id);
 	}
