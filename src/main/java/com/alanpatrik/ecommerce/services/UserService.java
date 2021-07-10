@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.alanpatrik.ecommerce.entities.User;
 import com.alanpatrik.ecommerce.repositories.UserRepository;
+import com.alanpatrik.ecommerce.services.exceptions.ResourceNotFoundException;
 
 @Service
 public class UserService {
@@ -21,7 +22,7 @@ public class UserService {
 	
 	public User findById(Long id) {
 		Optional<User> user = repository.findById(id);
-		return user.get();
+		return user.orElseThrow(() -> new ResourceNotFoundException(id));
 	}
 	
 	public User create(User user) {
@@ -34,9 +35,9 @@ public class UserService {
 	
 	public User update(Long id, User obj) {
 		Optional<User> entity = repository.findById(id);
-		updateData(entity.get(), obj);
+		updateData(entity.orElseThrow(() -> new ResourceNotFoundException(id)), obj);
 		
-		return repository.save(entity.get());
+		return repository.save(entity.orElseThrow(() -> new ResourceNotFoundException(id)));
 	}
 
 	private void updateData(User user, User obj) {
