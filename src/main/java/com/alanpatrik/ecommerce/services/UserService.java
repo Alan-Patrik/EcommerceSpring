@@ -1,9 +1,8 @@
 package com.alanpatrik.ecommerce.services;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
-
-import javax.persistence.EntityNotFoundException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -49,7 +48,7 @@ public class UserService {
 			Optional<User> entity = repository.findById(id);
 			updateData(entity.get(), obj);
 			return repository.save(entity.get());
-		} catch(EntityNotFoundException e) {
+		} catch(NoSuchElementException e) {
 			throw new ResourceNotFoundException(id);
 		}
 	}
